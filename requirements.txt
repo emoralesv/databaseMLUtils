@@ -1,0 +1,11 @@
+numpy
+pandas
+Pillow
+opencv-python
+scikit-image
+shapely; platform_system != "Windows"
+pyyaml
+tqdm
+matplotlib
+seaborn
+
