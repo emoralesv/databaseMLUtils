@@ -92,6 +92,25 @@ def save_classification_crop(
     return str(out_path)
 
 
+def save_classification_view(
+    img: Image.Image,
+    class_name: str,
+    transform_id: str,
+    out_dir: str | os.PathLike,
+    base_name: str,
+    index: int,
+) -> str:
+    """Save a transformed image under class/transform folder.
+
+    Structure: out_dir/class_name/transform_id/<base>_<index>.jpg
+    """
+    root = Path(out_dir) / class_name / transform_id
+    root.mkdir(parents=True, exist_ok=True)
+    out_path = root / f"{Path(base_name).stem}_{index}.jpg"
+    img.save(out_path, format="JPEG", quality=95)
+    return str(out_path)
+
+
 # Minimal PASCAL VOC reader (single file)
 def read_voc_xml(xml_path: str | os.PathLike) -> List[dict]:
     """Read PASCAL VOC XML and return list of objects with bbox and name.
