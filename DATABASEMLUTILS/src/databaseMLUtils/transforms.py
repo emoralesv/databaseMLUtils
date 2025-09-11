@@ -28,23 +28,6 @@ def _load_module_from_path(mod_name: str, path: str):
     return mod
 
 
-# Assumed available:
-#   class Transform
-#   def _load_module_from_path(mod_name: str, file_path: str): -> ModuleType | None
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
 class Transformer():
     
     def __init__(self):
