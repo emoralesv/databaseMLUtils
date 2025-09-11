@@ -283,60 +283,114 @@ def _write_readme(
     g = meta["global"]
     lines = []
     lines.append(f"# {dataset_name}\n")
-    lines.append("## Summary\n")
-    lines.append(f"- **Task:** classification\n")
+
+    # -------------------------------
+    # Overview
+    # -------------------------------
+    lines.append("## Overview\n")
+    lines.append("> **Objective:** TODO: Describe the goal of this dataset. Why it was collected? What problem does it solve?\n")
+    lines.append("> **Domain:** TODO: Agriculture / Medical / Industrial / etc.\n")
+    lines.append("> **Source:** TODO: Add collection method, instruments, or references.\n")
+
+    # -------------------------------
+    # Summary
+    # -------------------------------
+    lines.append("\n## Summary\n")
+    lines.append(f"- **Task:** Classification\n")
     lines.append(f"- **Images:** { _human_int(g['images_count']) }\n")
     lines.append(f"- **Classes:** { len(g['classes']) }\n")
     lines.append(f"- **URL:** {url}\n")
 
     # Splits
     if meta["splits"]:
-        lines.append("\n## Splits")
+        lines.append("\n### Dataset Splits\n")
         for sname, m in meta["splits"].items():
             lines.append(f"- **{sname}**: { _human_int(m['images_count']) } images")
 
-    # Classes
-    lines.append("\n## Classes")
-    for c in g["classes"]:
-        lines.append(f"- {c}: {g['per_class_counts'].get(c, 0)}")
+    # -------------------------------
+    # Dataset Structure
+    # -------------------------------
+    lines.append("\n## Dataset Structure\n")
+    lines.append("```\n")
+    lines.append("root/\n")
+    if meta["splits"]:
+        lines.append("  train/\n    class1/\n    class2/\n  val/\n    class1/\n    class2/\n")
+    else:
+        lines.append("  class1/\n  class2/\n")
+    lines.append("```\n")
+    lines.append("Each class folder contains raw image files.\n")
 
-    # Stats
-    lines.append("\n## Counts & Stats")
+    # -------------------------------
+    # Classes
+    # -------------------------------
+    lines.append("\n## Classes\n")
+    for c in g["classes"]:
+        lines.append(f"- **{c}** ({g['per_class_counts'].get(c, 0)} images) — TODO: Describe {c}")
+
+    # -------------------------------
+    # Statistics
+    # -------------------------------
+    lines.append("\n## Statistics\n")
     if g["corrupted_images"]:
         lines.append(f"- Corrupted images: **{g['corrupted_images']}**")
     lines.append(f"- Estimated duplicate images: **{g['estimated_duplicate_images']}**")
     lines.append(f"- Color summary: {g['color_summary']}")
-    lines.append(f"- Top resolutions (WxH, count): {g['resolution_top']}")
+    lines.append(f"- Top resolutions: {g['resolution_top']}")
+
     ws, hs, ars = g["width_stats"], g["height_stats"], g["aspect_ratio_stats"]
     def fmt(x, nd=1):
         return ("NA" if x is None else (f"{x:.{nd}f}" if isinstance(x, float) else str(x)))
+
     lines.append(f"- Width [min/mean/median/max]: {fmt(ws['min'])}/{fmt(ws['mean'])}/{fmt(ws['median'])}/{fmt(ws['max'])}")
     lines.append(f"- Height [min/mean/median/max]: {fmt(hs['min'])}/{fmt(hs['mean'])}/{fmt(hs['median'])}/{fmt(hs['max'])}")
     lines.append(f"- Aspect ratio [min/mean/median/max]: {fmt(ars['min'],3)}/{fmt(ars['mean'],3)}/{fmt(ars['median'],3)}/{fmt(ars['max'],3)}")
 
-    # Plots
+    # -------------------------------
+    # Visualizations
+    # -------------------------------
     if class_dist_png:
-        lines.append("\n## Class distribution")
+        lines.append("\n## Class Distribution\n")
         lines.append(f"![Class distribution]({class_dist_png})\n")
     if aspect_png:
-        lines.append("## Aspect ratio")
+        lines.append("## Aspect Ratio Histogram\n")
         lines.append(f"![Aspect ratio histogram]({aspect_png})\n")
 
-    # Thumbs
-    lines.append("## Examples (thumbnails)")
+    # -------------------------------
+    # Examples
+    # -------------------------------
+    lines.append("## Example Images\n")
     for cls in g["classes"]:
         thumbs = thumbs_map.get(cls, [])
         if not thumbs:
             continue
-        lines.append(f"**{cls}**")
+        lines.append(f"**{cls}**\n")
         row = " ".join(f"![]({t})" for t in thumbs)
         lines.append(row + "\n")
 
-    lines.append("## Notes")
-    lines.append("- Add license information here if available.")
-    lines.append("- Folder structure follows 'one folder per class'.")
+    # -------------------------------
+    # Usage
+    # -------------------------------
+    lines.append("## Usage\n")
+    lines.append("```python\n")
+    lines.append("# TODO: Add code snippet to load and use dataset (PyTorch / TensorFlow / etc.)\n")
+    lines.append("```\n")
+
+    # -------------------------------
+    # Citation
+    # -------------------------------
+    lines.append("## Citation\n")
+    lines.append("If you use this dataset, please cite:\n")
+    lines.append("```\nTODO: BibTeX or reference\n```\n")
+
+    # -------------------------------
+    # License
+    # -------------------------------
+    lines.append("## License\n")
+    lines.append("TODO: Add license information (MIT, CC-BY, proprietary, etc.)\n")
+
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
+
 
 # =========================
 # API principal
