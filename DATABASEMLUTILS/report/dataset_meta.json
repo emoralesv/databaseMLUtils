@@ -1,0 +1,83 @@
+{
+  "name": "Tomate Rugoso Clasificación",
+  "url": "file:///C:/Users/Berries/Documents/Repos/databaseMLUtils/DATABASEMLUTILS/report",
+  "task": "classification",
+  "images_count": 88,
+  "classes": [
+    "T_L_H",
+    "T_L_R",
+    "T_S_R"
+  ],
+  "per_class_counts": {
+    "T_L_H": 3,
+    "T_L_R": 84,
+    "T_S_R": 1
+  },
+  "color_summary": {
+    "color": 88
+  },
+  "resolution_top": [
+    [
+      "430x586",
+      1
+    ],
+    [
+      "229x433",
+      1
+    ],
+    [
+      "158x253",
+      1
+    ],
+    [
+      "450x716",
+      1
+    ],
+    [
+      "1044x433",
+      1
+    ],
+    [
+      "572x253",
+      1
+    ],
+    [
+      "427x736",
+      1
+    ],
+    [
+      "295x411",
+      1
+    ],
+    [
+      "1055x552",
+      1
+    ],
+    [
+      "427x745",
+      1
+    ]
+  ],
+  "width_stats": {
+    "min": 65.0,
+    "max": 1574.0,
+    "mean": 459.07954545454544,
+    "median": 353.0
+  },
+  "height_stats": {
+    "min": 81.0,
+    "max": 1018.0,
+    "mean": 426.5681818181818,
+    "median": 394.5
+  },
+  "aspect_ratio_stats": {
+    "min": 0.3825910931174089,
+    "max": 7.598360655737705,
+    "mean": 1.3013581792110978,
+    "median": 0.9556535871836545
+  },
+  "estimated_duplicate_images": 2,
+  "corrupted_images": 0,
+  "has_splits": false,
+  "splits": {}
+}

@@ -15,7 +15,22 @@ I = Image.open("databases/ToBRF.png")
 It = transforms.apply_transforms(['RGB', 'VEG', 'LBP', 'NGRDI', 'GRRI','MGRVI','VDVI','VARI'], I)
 
 
+#convert_xml_to_Classification(r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\tomate_rugoso_merge-1/train",
+                              # r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\views", 
+                               #List_transforms_ids=["RGB","LBP"], test=True)
 
-transforms.showImages(It,ncols = 4)
+
+from databaseMLUtils.reporting import make_dataset_report
+
+
+out_dir  = r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\report"
+make_dataset_report(
+    data=r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\views\RGB",
+    name="Tomate Rugoso Clasificación",
+    url=out_dir,
+    out="report",
+)
+
+
 
 
