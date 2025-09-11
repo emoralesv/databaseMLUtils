@@ -8,6 +8,8 @@ __pycache__/
 
 # Data files
 tomate_rugoso_merge-1/
+views/
+report/
 # Distribution / packaging
 .Python
 build/
