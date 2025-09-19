@@ -30,12 +30,25 @@ class LBPTransform(Transform):
 class EntropyTransform(Transform):
     id = "ENTROPY"
     description = "Local entropy with disk radius=5"
+    def __init__(self, radius: int = 10, base: int = 2):
+        super().__init__()
+        self.radius = radius
+        self.base = base
+        self._fp = disk(self.radius)
+        self._max_theoretical = np.log(self._fp.sum()) / np.log(self.base)
 
     def _apply(self, img):
         gray = self._to_grayscale_u8(img)
-        return entropy(gray, disk(5)).astype(np.float32)
+        gray = gray.copy()  # asegura writable
+        return entropy(gray, self._fp).astype(np.float32)
+
     def _normalize(self, x):
-        return super()._normalize(x)
+        # Normaliza a [0,1] con el máximo teórico
+        denom = self._max_theoretical if self._max_theoretical > 0 else max(float(x.max()), 1.0)
+        x_norm = (x / denom).astype(np.float32, copy=True)
+        # opcional: forzar valores >1 a 1
+        # x_norm = np.minimum(x_norm, 1.0)
+        return x_norm
     
 
 
