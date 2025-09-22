@@ -19,16 +19,20 @@ It = transforms.apply_transforms(['RGB', 'VEG', 'LBP', 'NGRDI', 'GRRI','MGRVI','
                               # r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\views", 
                                #List_transforms_ids=["RGB","LBP"], test=True)
 
-
+if True:
+    views = ["RGB", "VEG", "LBP", "NGRDI", "GRRI","MGRVI","VDVI","VARI","ENTROPY","LBP"]
+    convert_xml_to_Classification(r"I:\Documentos\Documentos\repos\multiviewRugoseTomatoClassification\tomate_rugoso\train",
+                                r"I:\Documentos\Documentos\repos\multiviewRugoseTomatoClassification\views",
+                                List_transforms_ids=views, test=False)
+                               
 from databaseMLUtils.reporting import make_dataset_report
 
 
-out_dir  = r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\report"
 make_dataset_report(
-    data=r"C:\Users\Berries\Documents\Repos\databaseMLUtils\DATABASEMLUTILS\views\RGB",
-    name="Tomate Rugoso Clasificación",
-    url=out_dir,
-    out="report",
+    data=r"I:\Documentos\Documentos\repos\multiviewRugoseTomatoClassification\views\RGB",
+    name="Tomate Rugoso",
+    url="Rugose",
+    out=r"I:\Documentos\Documentos\repos\multiviewRugoseTomatoClassification\report",
 )
 
 
